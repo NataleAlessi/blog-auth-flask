@@ -12,6 +12,11 @@ def index():
     return render_template('index.html', posts=posts)
 
 
+@post.route('/<int:post_id>')
+def show_post(post_id):
+    post = Post.query.get(post_id)
+    return render_template('post.html', post=post)
+
 
 @post.route('/create', methods=('GET', 'POST'))
 #@login_required
@@ -22,7 +27,7 @@ def create():
         if not title:
             flash('Title is required!')
         else:
-        	# return "some"
+            # return "some"
             new_post = Post(title=title, content=content)
             db.session.add(new_post)
             db.session.commit()
@@ -30,7 +35,18 @@ def create():
     return render_template('create.html')
 
 
-@post.route('/<int:post_id>')
-def show_post(post_id):
+@post.route('/<int:post_id>/edit', methods=('GET', 'POST'))
+def edit(post_id):
     post = Post.query.get(post_id)
-    return render_template('post.html', post=post)
+    if request.method == 'POST': #needs error handling
+        title = request.form['title']
+        content = request.form['content']
+
+        if not title:
+            flash('Title is required!')
+        else:
+            post.content = content
+            db.session.commit()
+            return redirect(url_for('post.index'))
+
+    return render_template('edit.html', post=post)

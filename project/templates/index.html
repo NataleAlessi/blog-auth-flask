@@ -5,14 +5,23 @@
     <h1 class="title">{% block title %} Welcome! {% endblock %}</h1>
 
     {% for post in posts %}
-        <a href="{{ url_for('post.show_post', post_id=post['id']) }}">
-            <h2 class="subtitle">{{ post['title'] }}</h2>
-        </a>
-        <span class="">{{ post['created'] }}</span>
-        <a class="" href="">
-            <span class="">Edit</span>
-        </a>
-        <hr>
+    <div class="columns has-text-left">
+    	<div class="column is-4">
+	        <a class="" href="{{ url_for('post.show_post', post_id=post['id']) }}">
+	            <h2 class="subtitle is-light is-capitalized">{{ post['title'] }}</h2>
+	        </a>    		
+    	</div>
+    	<div class="column">
+    		<p class="is-dark is-6">{{ post['content'][:100] }} ...</p>
+    	</div>
+    	<div class="column is-1 is-offset-1">
+    	    <span class="">{{ post['created'] }}</span>
+        	<a class="button is-dark is-large" href="{{ url_for('post.edit', post_id=post['id']) }}">
+            	<span class="is-light">Edit</span>
+        	</a>	
+    	</div>
+    </div>
+    <hr>
     {% endfor %}
 
 {% endblock %}

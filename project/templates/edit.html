@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">{% block title %} Edit "{{ post['title'] }}" {% endblock %}</h3>
+    <div class="box">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }}. <a href="{{ url_for('post.create') }}">Start anew?</a>.
+        </div>
+        {% endif %}
+    {% endwith %}
+        <form method="POST" action="{{ url_for('post.edit', post_id=post['id']) }}">
+
+            <label class="label" for="title">Title</label>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="title" placeholder="Post title" value="{{ request.form['title'] }}" autofocus="">
+                </div>
+            </div>
+
+            
+            <label class="label" for="content">{{ request.form['content'] or post['content'] }}</label>
+            <div class="field">
+                <div class="control">
+                    <textarea class="textarea" name="content" placeholder="Post content" autofocus="">{{ post['content'] }}</textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="button is-block is-info is-large is-fullwidth">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
