@@ -5,8 +5,8 @@ from . import db
 main = Blueprint('main', __name__)
 
 @main.route('/')
-def index():
-    return render_template('index.html')
+def landing():
+    return render_template('landing.html')
 
 @main.route('/profile')
 @login_required

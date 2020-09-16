@@ -1,10 +1,18 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-<h1 class="title">
-  Flask Login Example
-</h1>
-<h2 class="subtitle">
-  Easy authentication and authorization in Flask.
-</h2>
+
+    <h1 class="title">{% block title %} Welcome! {% endblock %}</h1>
+
+    {% for post in posts %}
+        <a href="{{ url_for('post.show_post', post_id=post['id']) }}">
+            <h2 class="subtitle">{{ post['title'] }}</h2>
+        </a>
+        <span class="">{{ post['created'] }}</span>
+        <a class="" href="">
+            <span class="">Edit</span>
+        </a>
+        <hr>
+    {% endfor %}
+
 {% endblock %}
