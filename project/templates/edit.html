@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="column is-4 is-offset-4">
+<div class="column is-8 is-offset-2">
     <h3 class="title">{% block title %} Edit "{{ post['title'] }}" {% endblock %}</h3>
     <div class="box">
     {% with messages = get_flashed_messages() %}
@@ -16,7 +16,7 @@
             <label class="label" for="title">Title</label>
             <div class="field">
                 <div class="control">
-                    <input class="input is-large" type="text" name="title" placeholder="Post title" value="{{ request.form['title'] }}" autofocus="">
+                    <input class="input is-large" type="text" name="title" placeholder="{{ post['title'] }}" value="{{ request.form['title'] or post['title'] }}" autofocus="">
                 </div>
             </div>
 
