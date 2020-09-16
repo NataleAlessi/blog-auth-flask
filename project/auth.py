@@ -15,10 +15,6 @@ def login():
 def signup():
     return render_template('signup.html')
 
-@auth.route('/logout')
-def logout():
-    return 'Logout'
-
 @auth.route('/signup', methods=['POST'])
 def signup_post():
     email = request.form.get('email')
