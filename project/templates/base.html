@@ -28,11 +28,11 @@
                             <a href="{{ url_for('post.create') }}" class="navbar-item">
                                 New Post
                             </a>
+                            {% endif %}
+                            {% if not current_user.is_authenticated %}
                             <a href="{{ url_for('post.index') }}" class="navbar-item">
                                 See All
                             </a>
-                            {% endif %}
-                            {% if not current_user.is_authenticated %}
                             <a href="{{ url_for('auth.login') }}" class="navbar-item">
                                 Login
                             </a>
